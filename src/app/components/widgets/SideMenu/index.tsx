@@ -1,6 +1,6 @@
 'use client'
 import { createContext, useContext, useState } from 'react'
-import { MoreOptionsSVG } from '../../assets/Icons'
+import { ChevronLeftSVG, ChevronRightSVG, MoreOptionsSVG } from '../../assets/Icons'
 import { Logo } from '../../atoms/Logo'
 
 // hay que hacer el tipo para el contexto y acomodarle algunas cositas
@@ -26,7 +26,7 @@ export const SideMenu: React.FC<Props> = ({ children }) => {
         <div className="p-4 pb-2 flex justify-between items-center">
           <Logo
             className={`overflow-hidden transition-all ${
-              expanded ? 'w-32' : 'w-0'
+              expanded ? 'w-[60px]' : 'w-0'
             }`}
           />
           <button
@@ -35,7 +35,7 @@ export const SideMenu: React.FC<Props> = ({ children }) => {
             }}
             className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100"
           >
-            {expanded ? <ChevronLeft /> : <ChevronRight />}
+            {expanded ? <ChevronLeftSVG /> : <ChevronRightSVG />}
           </button>
         </div>
 
@@ -56,8 +56,8 @@ export const SideMenu: React.FC<Props> = ({ children }) => {
               overflow-hidden transition-all ${expanded ? 'w-52 ml-3' : 'w-0'}`}
           >
             <div className="leading-4">
-              <h4 className="font-semibold">John Doe</h4>
-              <span className="text-xs text-gray-600">johndoe@gmail.com</span>
+              <h4 className="font-semibold">NEGREITOR</h4>
+              <span className="text-xs text-gray-600">pablooscarchavez@gmail.com</span>
             </div>
 
             <MoreOptionsSVG />
@@ -94,7 +94,7 @@ export const SidemenuItem: React.FC<SidemenuItemProps> = ({
       {icon}
       <span
         className={`overflow-hidden transition-all ${
-          expanded ? 'w-52 ml-3' : 'w-0'
+          expanded === true ? 'w-52 ml-3' : 'w-0'
         }`}
       >
         {text}
@@ -102,7 +102,7 @@ export const SidemenuItem: React.FC<SidemenuItemProps> = ({
       {alert !== undefined && (
         <div
           className={`absolute right-2 w-2 h-2 rounded bg-indigo-400 ${
-            expanded ? '' : 'top-2'
+            expanded === true ? '' : 'top-2'
           }`}
         />
       )}
