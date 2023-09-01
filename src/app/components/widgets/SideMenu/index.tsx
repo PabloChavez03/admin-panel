@@ -1,14 +1,8 @@
 'use client'
-import { createContext, useContext, useState } from 'react'
+import { createContext, useState } from 'react'
 import { ChevronLeftSVG, ChevronRightSVG, MoreOptionsSVG } from '../../assets/Icons'
 import { Logo } from '../../atoms/Logo'
-
-// hay que hacer el tipo para el contexto y acomodarle algunas cositas
-
-interface Props {
-  children: React.ReactNode
-}
-
+import { SideMenuItems } from './components/SideMenuItems'
 interface SidemenuContextType {
   expanded?: boolean
 }
@@ -17,7 +11,7 @@ export const SidemenuContext = createContext<SidemenuContextType | undefined>(
   undefined
 )
 
-export const SideMenu: React.FC<Props> = ({ children }) => {
+export const SideMenu = () => {
   const [expanded, setExpanded] = useState(true)
 
   return (
@@ -40,7 +34,7 @@ export const SideMenu: React.FC<Props> = ({ children }) => {
         </div>
 
         <SidemenuContext.Provider value={{ expanded }}>
-          <ul className="flex-1 px-3">{children}</ul>
+            <SideMenuItems />
         </SidemenuContext.Provider>
 
         <div className="border-t flex p-3">
@@ -65,56 +59,5 @@ export const SideMenu: React.FC<Props> = ({ children }) => {
         </div>
       </nav>
     </aside>
-  )
-}
-
-interface SidemenuItemProps {
-  icon: JSX.Element
-  text: string
-  active?: boolean
-  alert?: boolean
-}
-
-export const SidemenuItem: React.FC<SidemenuItemProps> = ({
-  icon,
-  text,
-  active,
-  alert
-}) => {
-  const { expanded } = useContext(SidemenuContext)
-  return (
-    <li
-      className={`
-      relative flex items-center py-2 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors group ${
-        active !== undefined
-          ? 'bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-800'
-          : 'hover:bg-indigo-50 text-gray-600'
-      }`}
-    >
-      {icon}
-      <span
-        className={`overflow-hidden transition-all ${
-          expanded === true ? 'w-52 ml-3' : 'w-0'
-        }`}
-      >
-        {text}
-      </span>
-      {alert !== undefined && (
-        <div
-          className={`absolute right-2 w-2 h-2 rounded bg-indigo-400 ${
-            expanded === true ? '' : 'top-2'
-          }`}
-        />
-      )}
-
-      {expanded === false && (
-        <div
-          className={`absolute left-full rounded-md px-2 py-1 ml-6 bg-indigo-100 text-indigo-800 text-sm invisible opacity-20 -translate-x-3 transition-all group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
-        `}
-        >
-          {text}
-        </div>
-      )}
-    </li>
   )
 }
