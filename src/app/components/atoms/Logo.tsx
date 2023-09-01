@@ -7,5 +7,5 @@ interface Props {
 }
 
 export const Logo: React.FC<Props> = ({ className }) => {
-  return <Image src={eluxLogo} alt="Elux Logo" className={`h-12 w-12 ${className}`}/>
+  return <Image src={eluxLogo} alt="Elux Logo" className={`h-12 ${className}`}/>
 }
