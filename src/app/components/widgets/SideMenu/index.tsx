@@ -1,151 +1,118 @@
-import { SettingsSVG, TeamsSVG } from '../../assets/Icons'
+'use client'
+import { createContext, useContext, useState } from 'react'
+import { ChevronLeft, ChevronRight, MoreOptionsSVG } from '../../assets/Icons'
+import { Logo } from '../../atoms/Logo'
 
-export const SideMenu = () => {
+interface Props {
+  children: React.ReactNode
+}
+
+interface SidemenuContextType {
+  expanded?: boolean
+}
+
+export const SidemenuContext = createContext<SidemenuContextType | undefined>(
+  undefined
+)
+
+export const SideMenu: React.FC<Props> = ({ children }) => {
+  const [expanded, setExpanded] = useState(true)
+
   return (
-    <aside className="flex h-screen w-16 flex-col justify-between border-e bg-white">
-      <div>
-        <div className="inline-flex h-16 w-16 items-center justify-center">
-          <span className="grid h-10 w-10 place-content-center rounded-lg bg-gray-100 text-xs text-gray-600">
-            L
-          </span>
+    <aside className="h-screen w-fit">
+      <nav className="h-full flex flex-col bg-white border-r shadow-sm">
+        <div className="p-4 pb-2 flex justify-between items-center">
+          <Logo
+            className={`overflow-hidden transition-all ${
+              expanded ? 'w-32' : 'w-0'
+            }`}
+          />
+          <button
+            onClick={() => {
+              setExpanded((curr) => !curr)
+            }}
+            className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100"
+          >
+            {expanded ? <ChevronLeft /> : <ChevronRight />}
+          </button>
         </div>
 
-        <div className="border-t border-gray-100">
-          <div className="px-2">
-            <div className="py-4">
-              <a
-                href=""
-                className="t group relative flex justify-center rounded bg-blue-50 px-2 py-1.5 text-blue-700"
-              >
-                <SettingsSVG />
-                <span className="absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white opacity-0 group-hover:opacity-100">
-                  General
-                </span>
-              </a>
+        <SidemenuContext.Provider value={{ expanded }}>
+          <ul className="flex-1 px-3">{children}</ul>
+        </SidemenuContext.Provider>
+
+        <div className="border-t flex p-3">
+          <img
+            src="https://ui-avatars.com/api/?background=0D8ABC&color=fff"
+            alt="ui-avatar"
+            className="w-10 h-10 rounded-md"
+          />
+
+          <div
+            className={`
+              flex justify-between items-center
+              overflow-hidden transition-all ${expanded ? 'w-52 ml-3' : 'w-0'}`}
+          >
+            <div className="leading-4">
+              <h4 className="font-semibold">John Doe</h4>
+              <span className="text-xs text-gray-600">johndoe@gmail.com</span>
             </div>
 
-            <ul className="space-y-1 border-t border-gray-100 pt-4">
-              <li>
-                <a
-                  href=""
-                  className="group relative flex justify-center rounded px-2 py-1.5 text-gray-500 hover:bg-gray-50 hover:text-gray-700"
-                >
-                  <TeamsSVG />
-                  <span className="absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white opacity-0 group-hover:opacity-100">
-                    Teams
-                  </span>
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href=""
-                  className="group relative flex justify-center rounded px-2 py-1.5 text-gray-500 hover:bg-gray-50 hover:text-gray-700"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 opacity-75"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
-                    />
-                  </svg>
-
-                  <span className="absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white opacity-0 group-hover:opacity-100">
-                    Billing
-                  </span>
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href=""
-                  className="group relative flex justify-center rounded px-2 py-1.5 text-gray-500 hover:bg-gray-50 hover:text-gray-700"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 opacity-75"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
-                    />
-                  </svg>
-
-                  <span className="absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white opacity-0 group-hover:opacity-100">
-                    Invoices
-                  </span>
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href=""
-                  className="group relative flex justify-center rounded px-2 py-1.5 text-gray-500 hover:bg-gray-50 hover:text-gray-700"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 opacity-75"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                    />
-                  </svg>
-
-                  <span className="absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white opacity-0 group-hover:opacity-100">
-                    Account
-                  </span>
-                </a>
-              </li>
-            </ul>
+            <MoreOptionsSVG />
           </div>
         </div>
-      </div>
-
-      <div className="sticky inset-x-0 bottom-0 border-t border-gray-100 bg-white p-2">
-        <form action="/logout">
-          <button
-            type="submit"
-            className="group relative flex w-full justify-center rounded-lg px-2 py-1.5 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 opacity-75"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-              />
-            </svg>
-
-            <span className="absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white opacity-0 group-hover:opacity-100">
-              Logout
-            </span>
-          </button>
-        </form>
-      </div>
+      </nav>
     </aside>
+  )
+}
+
+interface SidemenuItemProps {
+  icon: JSX.Element
+  text: string
+  active?: boolean
+  alert?: boolean
+}
+
+export const SidemenuItem: React.FC<SidemenuItemProps> = ({
+  icon,
+  text,
+  active,
+  alert
+}) => {
+  const { expanded } = useContext(SidemenuContext)
+  return (
+    <li
+      className={`
+      relative flex items-center py-2 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors group ${
+        active !== undefined
+          ? 'bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-800'
+          : 'hover:bg-indigo-50 text-gray-600'
+      }`}
+    >
+      {icon}
+      <span
+        className={`overflow-hidden transition-all ${
+          expanded ? 'w-52 ml-3' : 'w-0'
+        }`}
+      >
+        {text}
+      </span>
+      {alert !== undefined && (
+        <div
+          className={`absolute right-2 w-2 h-2 rounded bg-indigo-400 ${
+            expanded ? '' : 'top-2'
+          }`}
+        />
+      )}
+
+      {expanded === false && (
+        <div
+          className={`absolute left-full rounded-md px-2 py-1 ml-6 bg-indigo-100 text-indigo-800 text-sm invisible opacity-20 -translate-x-3 transition-all group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
+        `}
+        >
+          {text}
+        </div>
+      )}
+    </li>
   )
 }
