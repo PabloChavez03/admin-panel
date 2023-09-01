@@ -3,6 +3,8 @@ import { createContext, useContext, useState } from 'react'
 import { ChevronLeft, ChevronRight, MoreOptionsSVG } from '../../assets/Icons'
 import { Logo } from '../../atoms/Logo'
 
+// hay que hacer el tipo para el contexto y acomodarle algunas cositas
+
 interface Props {
   children: React.ReactNode
 }
