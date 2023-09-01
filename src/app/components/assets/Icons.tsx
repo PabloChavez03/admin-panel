@@ -117,7 +117,7 @@ export const LogoutSVG = () => {
   )
 }
 
-export const ChevronLeft = () => {
+export const ChevronLeftSVG = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -135,7 +135,7 @@ export const ChevronLeft = () => {
   )
 }
 
-export const ChevronRight = () => {
+export const ChevronRightSVG = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
