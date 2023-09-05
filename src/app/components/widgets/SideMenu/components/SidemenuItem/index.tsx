@@ -1,5 +1,5 @@
 'use client'
-import { useToggleSidemenu } from '@/app/hooks/useToggleSidemenu'
+import { useSidemenu } from '@/app/hooks/useSidemenu'
 
 interface SidemenuItemProps {
   icon: JSX.Element
@@ -11,15 +11,14 @@ interface SidemenuItemProps {
 export const SidemenuItem: React.FC<SidemenuItemProps> = ({
   icon,
   text,
-  active,
   alert
 }) => {
-  const { expanded } = useToggleSidemenu()
+  const { expanded, active } = useSidemenu()
   return (
     <li
       className={`
       relative flex items-center py-2 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors group ${
-        active !== undefined
+        active === true
           ? 'bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-800'
           : 'hover:bg-indigo-50 text-gray-600'
       }`}
