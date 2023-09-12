@@ -11,9 +11,10 @@ interface SidemenuItemProps {
 export const SidemenuItem: React.FC<SidemenuItemProps> = ({
   icon,
   text,
-  alert
+  alert,
+  active
 }) => {
-  const { expanded, active } = useSidemenu()
+  const { expanded } = useSidemenu()
   return (
     <li
       className={`

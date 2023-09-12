@@ -5,7 +5,6 @@ import {
   ProductsSVG,
   SettingsSVG
 } from '@/app/components/assets/Icons'
-import { useSidemenu } from '@/app/hooks/useSidemenu'
 import Link from 'next/link'
 import { SidemenuItem } from '../SidemenuItem'
 // 1. hay que catchear los errors de los links
@@ -16,7 +15,8 @@ const SIDEMENU_ITEMS = [
     id: 0,
     icon: <SettingsSVG />,
     text: 'General',
-    slug: 'general'
+    slug: 'general',
+    active: true
   },
   {
     id: 1,
@@ -46,17 +46,18 @@ const SIDEMENU_ITEMS = [
 ]
 
 export const SideMenuItems = () => {
-  const { toggleActive } = useSidemenu()
   return (
     <ul className="flex-1 px-3">
       {SIDEMENU_ITEMS.map((item, index) => {
-        const { icon, text, slug, id } = item
+        const { icon, text, active, alert } = item
 
         return (
-          <Link href={`/admin/${slug}`} key={index} onClick={() => { toggleActive?.({ index, id }) }}>
+          <Link href={'#'} key={index} >
             <SidemenuItem
             icon={icon}
             text={text}
+            active={active}
+            alert={alert}
             />
           </Link>
         )

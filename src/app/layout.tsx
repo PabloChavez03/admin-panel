@@ -5,8 +5,8 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Admin',
-  description: 'Admin panel by yours products'
+  title: 'Sidemenu',
+  description: 'Prototype of Sidemenu'
 }
 
 export default function RootLayout ({
